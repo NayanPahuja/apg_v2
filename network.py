@@ -44,20 +44,20 @@ class CBAM(nn.Module):
         x = x * self.sa(x)
         return x
     
-class SeaPixGAN_Nets:
+class AquaPixGAN_Nets:
     def __init__(self, base_model='pix2pix'):
         if base_model=='pix2pix': # default
-            self.netG = GeneratorSeaPixGan() 
-            self.netD = DiscriminatorSeaPixGan()
+            self.netG = GeneratorAquaPixGan() 
+            self.netD = DiscriminatorAquaPixGan()
         elif base_model=='resnet':
             #TODO: add ResNet support
             pass
         else: 
             pass
 
-class GeneratorSeaPixGan(nn.Module):
+class GeneratorAquaPixGan(nn.Module):
     def __init__(self):
-        super(GeneratorSeaPixGan, self).__init__()
+        super(GeneratorAquaPixGan, self).__init__()
     
         self.e1 = nn.Sequential(_EncodeLayer(3, 64, batch_normalize=False), CBAM(64))
         self.e2 = nn.Sequential(_EncodeLayer(64, 128), CBAM(128))
@@ -145,9 +145,9 @@ class _DecodeLayer(nn.Module):
         x = torch.cat((x, skip_input), 1)
         return x
 
-class DiscriminatorSeaPixGan(nn.Module):
+class DiscriminatorAquaPixGan(nn.Module):
     def __init__(self, in_channels=3):
-        super(DiscriminatorSeaPixGan, self).__init__()
+        super(DiscriminatorAquaPixGan, self).__init__()
 
         def down_layer(in_filters, out_filters, normalization=True):
             layers = [nn.Conv2d(in_filters, out_filters, 4, stride=2, padding=1)]

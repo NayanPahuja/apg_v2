@@ -3,13 +3,13 @@ import torch.nn as nn
 import torchvision.transforms as transforms
 from PIL import Image
 import io
-from network import GeneratorSeaPixGan
+from network import GeneratorAquaPixGan
 import numpy as np
 # Device configuration
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Load the pre-trained model
-model = GeneratorSeaPixGan()
+model = GeneratorAquaPixGan()
 model.load_state_dict(torch.load('generator_70.pth', map_location=DEVICE))
 model.eval()
 model.to(DEVICE)
